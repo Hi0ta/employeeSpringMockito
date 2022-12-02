@@ -1,11 +1,11 @@
 package skypro.employeeSpringMockito.service;
 
 import org.springframework.stereotype.Service;
+import skypro.employeeSpringMockito.exception.FieldsShouldNotBeEmptyException;
 import skypro.employeeSpringMockito.model.Employee;
 import skypro.employeeSpringMockito.record.EmployeeRequest;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -15,27 +15,31 @@ public class EmployeeService {
         return employees;
     }
 
-    public void addEmployee(EmployeeRequest employeeRequest) {
+    public Map<Integer, Employee> addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
-            throw new IllegalArgumentException("Employee name should be set");
+            throw new FieldsShouldNotBeEmptyException("поля Имя и Фамилия должны быть заполнены");
         }
         Employee employee = new Employee(employeeRequest.getFirstName(),
                 employeeRequest.getLastName(),
                 employeeRequest.getDepartment(),
                 employeeRequest.getSalary());
 
+        if (employees.containsValue(employee)){
+            throw new IllegalArgumentException("такой сотрудник уже существует");
+        }
         this.employees.put(employee.getId(), employee);
+        return employees;
     }
 
     public List<Employee> getAllEmployees() {
-        return employees.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(employees.values());
     }
 
-    public void deleteEmployee(int id){
-       this.employees.remove(id);
+    public String deleteEmployee(int id) {
+        String employee = String.valueOf(employees.get(id));
+        this.employees.remove(id);
+        return employee + " удален";
     }
-    // String employee = String.valueOf(employees.get(id));
-    //      return employee + " удален";
 
     public Employee searchEmployee(int id){
         return this.employees.get(id);

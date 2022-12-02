@@ -3,7 +3,7 @@ package skypro.employeeSpringMockito.model;
 import java.util.Objects;
 
 public class Employee {
-    private static int counter;
+    private static int counter = 1;
     private final int id;
     private final String firstName;
     private final String lastName;
@@ -34,12 +34,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && department == employee.department && salary == employee.salary && firstName.equals(employee.firstName) && lastName.equals(employee.lastName);
+        return department == employee.department && salary == employee.salary && firstName.equals(employee.firstName) && lastName.equals(employee.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, department, salary);
+        return Objects.hash(firstName, lastName, department, salary);
     }
 
     @Override

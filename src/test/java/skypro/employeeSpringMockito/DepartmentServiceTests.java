@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceTests {
-    // private final DepartmentServiceTests departmentServiceTests = new DepartmentServiceTests(); нужна ли эта строка?
     @Mock
     private EmployeeService employeeService;
 
@@ -44,7 +43,6 @@ public class DepartmentServiceTests {
         when(employeeService.getAllEmployees()).thenReturn(actualEmployees);
     }
 
-
     @Test
     public void checkGetListOfEmployeesByDepartment(){
         final int departmentId = 1;
@@ -57,6 +55,17 @@ public class DepartmentServiceTests {
     }
 
     @Test
+    public void checkGetListOfEmployeesByDepartmentWhenDepartmentDoesNotExist(){
+        final int departmentId = 5;
+
+        final List<Employee> standard = actualEmployees.stream()
+                .filter(employee -> employee.getDepartment() == departmentId)
+                .collect(Collectors.toList());
+        final List<Employee> checked = departmentService.getListOfEmployeesByDepartment(departmentId);
+        assertEquals(checked, standard);
+    } // в чем смысл такого теста? если отдела не существует в обоих случаях будет пусто...
+
+    @Test
     public void checkGetSalarySumOfDepartment(){
         final int departmentId = 2;
         final int standard = actualEmployees.stream()
@@ -64,6 +73,13 @@ public class DepartmentServiceTests {
                 .mapToInt(Employee::getSalary).sum();
         final int checked = departmentService.getSalarySumOfDepartment(departmentId);
         assertEquals(checked, standard);
+    }
+
+    @Test
+    public void checkGetSalarySumOfDepartmentWhenDepartmentDoesNotExist(){
+        final int departmentId = 5;
+        final int checked = departmentService.getSalarySumOfDepartment(departmentId);
+        assertEquals(checked, 0);
     }
 
     @Test
