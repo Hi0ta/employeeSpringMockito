@@ -1,0 +1,80 @@
+### создать сотрудника 0
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+  "firstName": "Ivan",
+  "lastName": "Ivanov",
+  "department":  1,
+  "salary": 1000
+}
+
+### создать сотрудника 1
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+  "firstName": "Petr",
+  "lastName": "Petrov",
+  "department":  2,
+  "salary": 3000
+}
+
+### создать сотрудника 2
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+  "firstName": "Sergey",
+  "lastName": "Sergeev",
+  "department":  1,
+  "salary": 4000
+}
+
+### создать сотрудника 3
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+  "firstName": "Lara",
+  "lastName": "Leonteva",
+  "department":  1,
+  "salary": 1500
+}
+
+### создать сотрудника 4
+POST http://localhost:8080/employees/add
+Content-Type: application/json
+
+{
+  "firstName": "Lena",
+  "lastName": "Larina",
+  "department":  2,
+  "salary": 5000
+}
+
+### Получить список всех сотрудников
+GET http://localhost:8080/employees
+
+### Удалить сотрудника
+GET http://localhost:8080/employees/3/delete
+
+### Найти сотрудника
+GET http://localhost:8080/employees/2/search
+
+### Cписок сотрудников по департаменту
+GET http://localhost:8080/department/1/employees
+
+### Сумма зарплат по департаменту
+GET http://localhost:8080/department/2/salary/sum
+
+### Максимальная зарплата по департаменту
+GET http://localhost:8080/department/1/salary/max
+
+### Минимальная зарплата по департаменту
+GET http://localhost:8080/department/1/salary/min
+
+### Cписок сотрудников, сгруппированых по отделам
+GET http://localhost:8080/department/employees
+
+
