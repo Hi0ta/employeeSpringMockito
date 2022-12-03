@@ -15,7 +15,7 @@ public class EmployeeService {
         return employees;
     }
 
-    public Map<Integer, Employee> addEmployee(EmployeeRequest employeeRequest) {
+    public void addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
             throw new FieldsShouldNotBeEmptyException("поля Имя и Фамилия должны быть заполнены");
         }
@@ -28,7 +28,6 @@ public class EmployeeService {
             throw new IllegalArgumentException("такой сотрудник уже существует");
         }
         this.employees.put(employee.getId(), employee);
-        return employees;
     }
 
     public List<Employee> getAllEmployees() {

@@ -1,6 +1,5 @@
 package skypro.employeeSpringMockito;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,7 +62,7 @@ public class DepartmentServiceTests {
                 .collect(Collectors.toList());
         final List<Employee> checked = departmentService.getListOfEmployeesByDepartment(departmentId);
         assertEquals(checked, standard);
-    } // в чем смысл такого теста? если отдела не существует в обоих случаях будет пусто...
+    }
 
     @Test
     public void checkGetSalarySumOfDepartment(){

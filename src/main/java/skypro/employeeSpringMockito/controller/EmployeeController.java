@@ -22,8 +22,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public Map<Integer, Employee> createEmployee(@RequestBody EmployeeRequest employeeRequest){
-        return this.employeeService.addEmployee(employeeRequest);
+    public void createEmployee(@RequestBody EmployeeRequest employeeRequest){
+       this.employeeService.addEmployee(employeeRequest);
     }
 
     @GetMapping("/{id}/delete")
